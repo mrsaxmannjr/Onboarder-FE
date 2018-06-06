@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
+
 import Header from "./Components/Header";
-import Login from "./Components/Login";
+import Glinks from "./Components/Glinks";
+
+import links from "./lib/staticData";
 
 class App extends Component {
+  state = {
+    links: links,
+  }
+
   render() {
+    console.log("state", this.state);
+    const { links } = this.state;
     return (
-      <Router>
         <React.Fragment>
           <Header />
-          <Switch>
-            <Route exact path="/Login" component={Login} />
-          </Switch>
+          <div className="container" >
+          {links.map(link => <Glinks key={link.id} link={link} />)}
+          </div>
         </React.Fragment>
-      </Router>
     );
   }
 }
