@@ -1,30 +1,60 @@
 import React, { Component } from 'react';
 
-const Glinks = ({ link }) => (
-      <React.Fragment>
-        <div id="accordion">
-  <div className="card">
-    <div className="card-header" id="headingThree">
-      <h5 className="mb-0">
-            <button className="btn btn-link collapsed" data-toggle="collapse" data-target={`#${link.linkName}`} aria-expanded="false" aria-controls="collapseThree">
-          {link.linkName}
-        </button>
-      </h5>
-    </div>
-    <div id={link.linkName} className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-          <div className="card-body">
-            {link.description}
-          </div>
-          <div className="card-body">
-            <p>Frequency: {link.frequency}</p>
-          </div>
-          <div className="card-body">
-            <a href={`${link.url}`} target="_blank" class="btn btn-primary btn-lg" role="button">Link</a>
-          </div>
-    </div>
-  </div>
-</div>
-      </React.Fragment>
+import Form from "../Form";
+import Glink from "../Glink";
+
+class Glinks extends Component {
+  state = {
+    isLoaded: false,
+    links: [],
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/api/v1/glinks/")
+      .then(response => response.json())
+      .then(links => this.setState({
+        isLoaded: true,
+        links: links,
+      }))
+    console.log("State: ", this.state);
+  }
+
+  getFormData = (formData) => {
+    const newFormData = this.state.links;
+    newFormData.push(formData)
+    this.setState({
+      links: newFormData,
+    })
+  }
+
+  deleteLink = (link) => {
+    const links = this.state.links.slice();
+    const index = links.indexOf(link);
+    links.splice(index, 1);
+    this.setState({
+      links: links
+    })
+  }
+
+  updateLink = (link, editData) => {
+    const links = this.state.links.slice();
+    const index = this.state.links.indexOf(link);
+    links.splice(index, 1, editData)
+    this.setState({
+      links: links
+    })
+  }
+
+  render() {
+    console.log("render state", this.state);
+    const { isLoaded, links } = this.state
+    return (
+      <div className="container">
+        <Form getFormData={this.getFormData} />
+        {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : links.map(link => <Glink key={link.id} link={link} key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
+      </div>
     );
+  }
+}
 
 export default Glinks;

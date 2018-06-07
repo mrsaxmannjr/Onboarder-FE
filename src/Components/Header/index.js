@@ -5,7 +5,7 @@ class Header extends Component {
     return (
       <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a className="navbar-brand" href="#">Galvanize Onboarder</a>
+        <a className="navbar-brand" href="/">Galvanize Onboarder</a>
     </nav>
   </React.Fragment>
     );
