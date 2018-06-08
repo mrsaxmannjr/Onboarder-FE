@@ -15,7 +15,6 @@ class Glink extends Component {
   handleChange = (event) => {
     const value = event.target.value
     const name = event.target.name
-    this.calculateOneRM(value)
     this.setState({
       [name]: value
     })
@@ -63,7 +62,7 @@ class Glink extends Component {
     this.props.deleteLink(link);
   }
 
-  render() {
+  linkAccordian = () => {
     const { link } = this.props
     return (
       <React.Fragment>
@@ -89,6 +88,64 @@ class Glink extends Component {
           </div>
         </div>
       </React.Fragment>
+    )
+  }
+
+  linkEditForm = () => {
+    return (
+      <React.Fragment>
+        <div id="accordion">
+          <div className="card border-primary mb-3">
+            <div className="card-header" id="headingThree">
+              <h5 className="mb-0">
+                <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
+                  Create a New Link
+                </button>
+              </h5>
+            </div>
+            <div id="new-link" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div className="card-body">
+                <form onSubmit={this.handleSubmit}>
+
+                  <div className="form-group">
+                    <label htmlFor="linkName">Link Name</label>
+                    <input type="text" className="form-control" placeholder="Link Name" name="linkName" value={this.state.linkName} onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="description">Link Description</label>
+                    <textarea type="text" className="form-control" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="frequency">Frequency of Use</label>
+                    <input type="text" className="form-control" placeholder="Frequency" name="frequency" value={this.state.frequency} onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="url">Link URL</label>
+                    <input type="text" className="form-control" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <button className="btn btn-primary" onClick={this.handleEdit}>Update</button>
+                    <button className="btn btn-danger" onClick={this.handleToggle} >Cancel</button>
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </React.Fragment>
+    )
+  }
+
+  render() {
+    return (
+      this.state.edit ? this.linkEditForm() : this.linkAccordian()
     )
   }
 }

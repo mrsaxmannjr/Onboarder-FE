@@ -15,7 +15,6 @@ class Glinks extends Component {
         isLoaded: true,
         links: links,
       }))
-    console.log("State: ", this.state);
   }
 
   getFormData = (formData) => {
@@ -46,7 +45,6 @@ class Glinks extends Component {
   }
 
   render() {
-    console.log("render state", this.state);
     const { isLoaded, links } = this.state
     return (
       <div className="container">
