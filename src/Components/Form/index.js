@@ -66,10 +66,10 @@ class Form extends Component {
     return (
       <React.Fragment>
         <div id="accordion">
-          <div className="card border-primary mb-3">
+          <div className="card border-success mb-3">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
-                <button className="btn btn-primary btn-lg btn-block text-left" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
+                <button className="btn btn-success btn-lg btn-block text-left" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
                   Create a New Link
                 </button>
               </h5>
