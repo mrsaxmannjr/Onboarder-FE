@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Form from "../Form";
 import Glink from "../Glink";
 
@@ -9,8 +8,8 @@ class Glinks extends Component {
     links: [],
   }
 
-  componentDidMount() {
-    fetch("http://localhost:3000/api/v1/glinks/")
+  componentDidMount = () => {
+    fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks")
       .then(response => response.json())
       .then(links => this.setState({
         isLoaded: true,
@@ -25,6 +24,7 @@ class Glinks extends Component {
     this.setState({
       links: newFormData,
     })
+    this.componentDidMount()
   }
 
   deleteLink = (link) => {

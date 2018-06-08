@@ -42,7 +42,7 @@ class Glink extends Component {
   editLink = (editData) => {
     const { link } = this.props;
     if (!link.id) {throw new Error("Invalid object")}
-    fetch(`http://localhost:3000/api/v1/glinks/${link.id}`, {
+    fetch(`https://onboarder-backend.herokuapp.com/api/v1/glinks/${link.id}`, {
       method: "PUT",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(editData),
@@ -58,7 +58,7 @@ class Glink extends Component {
   handleDelete = (event) => {
     event.preventDefault();
     const { link } = this.props;
-    fetch(`http://localhost:3000/api/v1/glinks/${link.id}`, { method: 'DELETE' })
+    fetch(`https://onboarder-backend.herokuapp.com/api/v1/glinks/${link.id}`, { method: 'DELETE' })
       .catch(err => console.error(err));
     this.props.deleteLink(link);
   }
@@ -78,7 +78,7 @@ class Glink extends Component {
             </div>
             <div id={link.linkName} className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div className="card-body ">
-              <h5 class="card-title text-primary">{link.linkName}</h5>
+              <h5 className="card-title text-primary">{link.linkName}</h5>
               <p className="card-text">{link.description}</p>
               <p className="card-text">Frequency: {link.frequency}</p>
                 <a href={`${link.url}`} target="_blank" className="btn btn-primary mr-md-5" role="button">Go to Link</a>
