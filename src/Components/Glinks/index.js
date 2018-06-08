@@ -48,6 +48,12 @@ class Glinks extends Component {
     const { isLoaded, links } = this.state
     return (
       <div className="container">
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">Welcome to Galvanize Onboarder!</h1>
+            <p className="lead">Below, you will find links to various Google docs, Github repos and Galvanize Apps.  These tools are vital to your success as a Galvanize Instructor.  Feel free to add, edit or delete links as needed.   </p>
+          </div>
+        </div>
         <Form getFormData={this.getFormData} />
         {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : links.map(link => <Glink key={link.id} link={link} key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
       </div>

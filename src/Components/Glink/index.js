@@ -70,7 +70,7 @@ class Glink extends Component {
           <div className="card border-primary mb-3">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
-                <button className="btn btn-link collapsed" data-toggle="collapse" data-target={`#${link.linkName}`} aria-expanded="false" aria-controls="collapseThree">
+                <button className="btn btn-primary btn-lg btn-block text-left" data-toggle="collapse" data-target={`#${link.linkName}`} aria-expanded="false" aria-controls="collapseThree">
                   {link.linkName}
                 </button>
               </h5>
@@ -98,7 +98,7 @@ class Glink extends Component {
           <div className="card border-primary mb-3">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
-                <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
+                <button className="btn btn-link collapsed " data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
                   Create a New Link
                 </button>
               </h5>

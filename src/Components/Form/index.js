@@ -4,6 +4,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      addNewLink: false,
       linkName: "",
       url: "",
       description: "",
@@ -24,8 +25,15 @@ class Form extends Component {
     })
   }
 
+  handleToggle = () => {
+    this.setState({
+      addNewLink: !this.state.addNewLink
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
+    this.handleToggle()
     const formData = {
       linkName: this.state.linkName,
       url: this.state.url,
@@ -34,13 +42,14 @@ class Form extends Component {
     }
     this.postNewLink(formData)
     this.setState({
+      addNewLink: !this.state.addNewLink,
       linkName: "",
       url: "",
       description: "",
       frequency: "",
     })
   }
-
+  
   postNewLink = (formData) => {
     fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks", {
       method: "POST",
@@ -53,18 +62,19 @@ class Form extends Component {
   }
 
   render() {
+    const { addNewLink } = this.state;
     return (
       <React.Fragment>
         <div id="accordion">
           <div className="card border-primary mb-3">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
-                <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
+                <button className="btn btn-primary btn-lg btn-block text-left" data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
                   Create a New Link
                 </button>
               </h5>
             </div>
-            <div id="new-link" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div id="new-link" className={addNewLink ? "collapse show" : "collapse"} aria-labelledby="headingThree" data-parent="#accordion">
               <div className="card-body">
                 <form onSubmit={this.handleSubmit}>
 
