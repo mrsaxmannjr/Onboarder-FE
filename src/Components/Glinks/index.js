@@ -56,7 +56,6 @@ class Glinks extends Component {
   render() {
     const { isLoaded, links, search } = this.state
     const filteredLinks = links.filter(link => link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-    console.log(filteredLinks);
     return (
     <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
