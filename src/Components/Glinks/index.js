@@ -10,7 +10,11 @@ class Glinks extends Component {
   }
 
   componentDidMount = () => {
-    fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks")
+    this.getData()
+  }
+
+  getData = () => {
+    return fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks")
       .then(response => response.json())
       .then(links => this.setState({
         isLoaded: true,
@@ -26,13 +30,8 @@ class Glinks extends Component {
     })
   }
 
-  getFormData = (formData) => {
-    const newFormData = this.state.links;
-    newFormData.push(formData)
-    this.setState({
-      links: newFormData,
-    })
-    this.componentDidMount()
+  getFormData = () => {
+    this.getData()
   }
 
   deleteLink = (link) => {
@@ -54,8 +53,10 @@ class Glinks extends Component {
   }
 
   render() {
-    const { isLoaded, links, search } = this.state
-    const filteredLinks = links.filter(link => link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+    let { isLoaded, links, search } = this.state
+    search = search || "";
+    console.log(links);
+    const filteredLinks = links.filter(link => link && link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
     return (
     <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">

@@ -58,7 +58,7 @@ class Form extends Component {
       body: JSON.stringify(formData)
     })
       .then(response => response.json())
-      .then(response => this.props.getFormData(response))
+      .then(response => this.props.getFormData())
       .catch(err => console.error(err))
   }
 
