@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="accordion"
+>
+  <div
+    className="card border-success mb-3"
+  >
+    <div
+      className="card-header"
+      id="headingThree"
+    >
+      <h5
+        className="mb-0"
+      >
+        <button
+          aria-controls="collapseThree"
+          aria-expanded="false"
+          className="btn btn-success btn-lg btn-block text-left"
+          data-target="#new-link"
+          data-toggle="collapse"
+        >
+          Create a New Link
+        </button>
+      </h5>
+    </div>
+    <div
+      aria-labelledby="headingThree"
+      className="collapse"
+      data-parent="#accordion"
+      id="new-link"
+    >
+      <div
+        className="card-body"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="linkName"
+            >
+              Link Name
+            </label>
+            <input
+              className="form-control"
+              name="linkName"
+              onChange={[Function]}
+              placeholder="Link Name"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="description"
+            >
+              Link Description
+            </label>
+            <textarea
+              className="form-control"
+              name="description"
+              onChange={[Function]}
+              placeholder="Description"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="frequency"
+            >
+              Frequency of Use
+            </label>
+            <input
+              className="form-control"
+              name="frequency"
+              onChange={[Function]}
+              placeholder="Frequency"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="url"
+            >
+              Link URL
+            </label>
+            <input
+              className="form-control"
+              name="url"
+              onChange={[Function]}
+              placeholder="URL"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <button
+              className="btn btn-primary"
+              disabled={true}
+              type="submit"
+            >
+              Create New Link
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

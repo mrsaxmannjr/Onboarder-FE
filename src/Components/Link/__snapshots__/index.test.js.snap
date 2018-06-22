@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link renders correctly 1`] = `
+<div
+  className="test-class"
+>
+  <a
+    href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url"
+  >
+    Mozilla
+  </a>
+</div>
+`;
