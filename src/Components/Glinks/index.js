@@ -5,7 +5,7 @@ import Glink from "../Glink";
 class Glinks extends Component {
   state = {
     isLoaded: false,
-    links: [],
+    links: JSON.parse(window.localStorage.gOnboarderLinks || '[]'),
     search: ""
   }
 
@@ -16,10 +16,13 @@ class Glinks extends Component {
   getData = () => {
     return fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks")
       .then(response => response.json())
-      .then(links => this.setState({
-        isLoaded: true,
-        links: links,
-      }))
+      .then(links => {
+        this.setState({
+          isLoaded: true,
+          links: links,
+        })
+        window.localStorage.gOnboarderLinks = JSON.stringify(links)
+      })
   }
 
   handleChange = (event) => {
@@ -53,9 +56,9 @@ class Glinks extends Component {
   }
 
   render() {
+    console.log("State", this.state.links);
     let { isLoaded, links, search } = this.state
     search = search || "";
-    console.log(links);
     const filteredLinks = links.filter(link => link && link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
     return (
     <React.Fragment>
@@ -93,7 +96,7 @@ class Glinks extends Component {
           </div>
         </div>
         <Form getFormData={this.getFormData} />
-          {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
+          {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
         </div>
     </React.Fragment>  
     );

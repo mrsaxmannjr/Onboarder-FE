@@ -99,7 +99,7 @@ class Glink extends Component {
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
                 <button className="btn btn-link collapsed " data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
-                  Create a New Link
+                  Update Link
                 </button>
               </h5>
             </div>
