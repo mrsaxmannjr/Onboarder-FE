@@ -63,8 +63,8 @@ class Glinks extends Component {
     return (
     <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" href="#">Galvanize Onboarder</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <a className="navbar-brand" target="_blank" href="https://jamesmann.tech/">Galvanize Onboarder</a>
+          {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
 
@@ -83,10 +83,7 @@ class Glinks extends Component {
                 <a className="nav-link" href="#"></a>
               </li>
             </ul>
-            <form className="form-inline my-2 my-lg-0">
-              <input onChange={this.handleChange} value={this.state.search} name="search" className="form-control mr-sm-2" type="text" placeholder="Search for Links" />
-            </form>
-          </div>
+          </div> */}
         </nav>
       <div className="container">
         <div className="jumbotron jumbotron-fluid">
@@ -94,7 +91,13 @@ class Glinks extends Component {
             <h1 className="display-4">Welcome to Galvanize Onboarder!</h1>
             <p className="lead">Below, you will find links to various Google docs, Github repos and Galvanize Apps.  These tools are vital to your success as a Galvanize Instructor.  Feel free to add, edit or delete links as needed.   </p>
           </div>
-        </div>
+          </div>
+          <form className="card border-success mb-3 bg-primary">
+            <div className="form-group card-body  ">
+              <h5 className="text-center text-white">EUGOOGLIZER</h5>
+              <input onChange={this.handleChange} value={this.state.search} name="search" className="form-control mr-sm-2" type="text" placeholder="Search for Links" />
+            </div>
+          </form>
         <Form getFormData={this.getFormData} />
           {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
         </div>
