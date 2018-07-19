@@ -4,7 +4,6 @@ import Glink from '../Glink';
 
 class Glinks extends Component {
   state = {
-    isLoaded: false,
     links: JSON.parse(window.localStorage.gOnboarderLinks || '[]'),
     search: ''
   }
@@ -17,7 +16,6 @@ class Glinks extends Component {
     .then(response => response.json())
     .then(links => {
       this.setState({
-        isLoaded: true,
         links: links,
       })
       window.localStorage.gOnboarderLinks = JSON.stringify(links)
@@ -58,7 +56,7 @@ class Glinks extends Component {
   }
 
   render() {
-    let { isLoaded, links, search } = this.state
+    let { links, search } = this.state
     search = search || '';
     const filteredLinks = links.filter(link => link && link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
     return (
@@ -81,7 +79,7 @@ class Glinks extends Component {
             </div>
           </form>
           <Form getFormData={this.getFormData} />
-          {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
+          {!links ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
         </div>
       </React.Fragment>
     );
