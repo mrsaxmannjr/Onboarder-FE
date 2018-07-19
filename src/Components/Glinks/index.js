@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import Form from "../Form";
-import Glink from "../Glink";
+import Form from '../Form';
+import Glink from '../Glink';
 
 class Glinks extends Component {
   state = {
     isLoaded: false,
     links: JSON.parse(window.localStorage.gOnboarderLinks || '[]'),
-    search: ""
+    search: ''
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.getData()
   }
 
-  getData = () => {
-    return fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks")
-      .then(response => response.json())
-      .then(links => {
-        this.setState({
-          isLoaded: true,
-          links: links,
-        })
-        window.localStorage.gOnboarderLinks = JSON.stringify(links)
+  getData = () => fetch('https://onboarder-backend.herokuapp.com/api/v1/glinks')
+    .then(response => response.json())
+    .then(links => {
+      this.setState({
+        isLoaded: true,
+        links: links,
       })
-  }
+      window.localStorage.gOnboarderLinks = JSON.stringify(links)
+    })
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -31,6 +29,10 @@ class Glinks extends Component {
     this.setState({
       [name]: value
     })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
   }
 
   getFormData = () => {
@@ -56,52 +58,32 @@ class Glinks extends Component {
   }
 
   render() {
-    console.log("State", this.state.links);
     let { isLoaded, links, search } = this.state
-    search = search || "";
+    search = search || '';
     const filteredLinks = links.filter(link => link && link.linkName.toLowerCase().indexOf(search.toLowerCase()) !== -1)
     return (
-    <React.Fragment>
+      <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" target="_blank" href="https://jamesmann.tech/">Galvanize Onboarder</a>
-          {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          <a className="navbar-brand" rel="noopener noreferrer" target="_blank" href="https://jamesmann.tech/">Galvanize Onboarder</a>
 
-          <div className="collapse navbar-collapse" id="navbarColor01">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="#"><span className="sr-only">(current)</span></a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#"></a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#"></a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#"></a>
-              </li>
-            </ul>
-          </div> */}
         </nav>
-      <div className="container">
-        <div className="jumbotron jumbotron-fluid">
-          <div className="container">
-            <h1 className="display-4">Welcome to Galvanize Onboarder!</h1>
-            <p className="lead">Below, you will find links to various Google docs, Github repos and Galvanize Apps.  These tools are vital to your success as a Galvanize Instructor.  Feel free to add, edit or delete links as needed.   </p>
+        <div className="container">
+          <div className="jumbotron jumbotron-fluid">
+            <div className="container">
+              <h1 className="display-4">Welcome to Galvanize Onboarder!</h1>
+              <p className="lead">Below, you will find links to various Google docs, Github repos and Galvanize Apps.  These tools are vital to your success as a Galvanize Instructor.  Feel free to add, edit or delete links as needed.   </p>
+            </div>
           </div>
-          </div>
-          <form className="card border-success mb-3 bg-primary">
+          <form onSubmit={this.handleSubmit} className="card border-success mb-3 bg-primary">
             <div className="form-group card-body  ">
               <h5 className="text-center text-white">EUGOOGLIZER</h5>
               <input onChange={this.handleChange} value={this.state.search} name="search" className="form-control mr-sm-2" type="text" placeholder="Search for Links" />
             </div>
           </form>
-        <Form getFormData={this.getFormData} />
-          {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
+          <Form getFormData={this.getFormData} />
+          {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
         </div>
-    </React.Fragment>  
+      </React.Fragment >
     );
   }
 }
