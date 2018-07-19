@@ -5,10 +5,10 @@ class Form extends Component {
     super(props);
     this.state = {
       addNewLink: false,
-      linkName: "",
-      url: "",
-      description: "",
-      frequency: "",
+      linkName: '',
+      url: '',
+      description: '',
+      frequency: '',
     };
   }
 
@@ -43,17 +43,17 @@ class Form extends Component {
     this.postNewLink(formData)
     this.setState({
       addNewLink: !this.state.addNewLink,
-      linkName: "",
-      url: "",
-      description: "",
-      frequency: "",
+      linkName: '',
+      url: '',
+      description: '',
+      frequency: '',
     })
   }
-  
+
   postNewLink = (formData) => {
-    fetch("https://onboarder-backend.herokuapp.com/api/v1/glinks", {
-      method: "POST",
-      headers: {"content-type": "application/json"},
+    fetch('https://onboarder-backend.herokuapp.com/api/v1/glinks', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(formData)
     })
       .then(response => response.json())
@@ -74,28 +74,28 @@ class Form extends Component {
                 </button>
               </h5>
             </div>
-            <div id="new-link" className={addNewLink ? "collapse show" : "collapse"} aria-labelledby="headingThree" data-parent="#accordion">
+            <div id="new-link" className={addNewLink ? 'collapse show' : 'collapse'} aria-labelledby="headingThree" data-parent="#accordion">
               <div className="card-body">
                 <form onSubmit={this.handleSubmit}>
 
-                <div className="form-group">
-                  <label htmlFor="linkName">Link Name</label>
-                  <input type="text" className="form-control" placeholder="Link Name" name="linkName" value={this.state.linkName} onChange={this.handleChange} />
+                  <div className="form-group">
+                    <label htmlFor="linkName">Link Name</label>
+                    <input type="text" className="form-control" placeholder="Link Name" name="linkName" value={this.state.linkName} onChange={this.handleChange} />
                   </div>
 
-                <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="description">Link Description</label>
                     <textarea type="text" className="form-control" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} />
                   </div>
 
-                <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="frequency">Frequency of Use</label>
                     <input type="text" className="form-control" placeholder="Frequency" name="frequency" value={this.state.frequency} onChange={this.handleChange} />
                   </div>
 
-                <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="url">Link URL</label>
-                  <input type="text" className="form-control" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange} />
+                    <input type="text" className="form-control" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">

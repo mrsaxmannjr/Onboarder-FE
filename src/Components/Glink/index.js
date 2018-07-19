@@ -40,10 +40,10 @@ class Glink extends Component {
 
   editLink = (editData) => {
     const { link } = this.props;
-    if (!link.id) { throw new Error("Invalid object") }
+    if (!link.id) { throw new Error('Invalid object') }
     fetch(`https://onboarder-backend.herokuapp.com/api/v1/glinks/${link.id}`, {
-      method: "PUT",
-      headers: new Headers({ "Content-Type": "application/json" }),
+      method: 'PUT',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(editData),
     })
       .then(response => response.json())
@@ -91,57 +91,55 @@ class Glink extends Component {
     )
   }
 
-  linkEditForm = () => {
-    return (
-      <React.Fragment>
-        <div id="accordion">
-          <div className="card border-primary mb-3">
-            <div className="card-header" id="headingThree">
-              <h5 className="mb-0">
-                <button className="btn btn-link collapsed " data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
-                  Update Link
+  linkEditForm = () => (
+    <React.Fragment>
+      <div id="accordion">
+        <div className="card border-primary mb-3">
+          <div className="card-header" id="headingThree">
+            <h5 className="mb-0">
+              <button className="btn btn-link collapsed " data-toggle="collapse" data-target="#new-link" aria-expanded="false" aria-controls="collapseThree">
+                Update Link
                 </button>
-              </h5>
+            </h5>
+          </div>
+          <div id="new-link" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div className="card-body">
+              <form onSubmit={this.handleSubmit}>
+
+                <div className="form-group">
+                  <label htmlFor="linkName">Link Name</label>
+                  <input type="text" className="form-control" placeholder="Link Name" name="linkName" value={this.state.linkName} onChange={this.handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="description">Link Description</label>
+                  <textarea type="text" className="form-control" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="frequency">Frequency of Use</label>
+                  <input type="text" className="form-control" placeholder="Frequency" name="frequency" value={this.state.frequency} onChange={this.handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="url">Link URL</label>
+                  <input type="text" className="form-control" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <button className="btn btn-primary" onClick={this.handleEdit}>Update</button>
+                  <button className="btn btn-danger" onClick={this.handleToggle} >Cancel</button>
+                </div>
+
+              </form>
             </div>
-            <div id="new-link" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div className="card-body">
-                <form onSubmit={this.handleSubmit}>
 
-                  <div className="form-group">
-                    <label htmlFor="linkName">Link Name</label>
-                    <input type="text" className="form-control" placeholder="Link Name" name="linkName" value={this.state.linkName} onChange={this.handleChange} />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="description">Link Description</label>
-                    <textarea type="text" className="form-control" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="frequency">Frequency of Use</label>
-                    <input type="text" className="form-control" placeholder="Frequency" name="frequency" value={this.state.frequency} onChange={this.handleChange} />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="url">Link URL</label>
-                    <input type="text" className="form-control" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange} />
-                  </div>
-
-                  <div className="form-group">
-                    <button className="btn btn-primary" onClick={this.handleEdit}>Update</button>
-                    <button className="btn btn-danger" onClick={this.handleToggle} >Cancel</button>
-                  </div>
-
-                </form>
-              </div>
-
-            </div>
           </div>
         </div>
+      </div>
 
-      </React.Fragment>
-    )
-  }
+    </React.Fragment>
+  )
 
   render() {
     return (
