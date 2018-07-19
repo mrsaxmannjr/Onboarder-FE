@@ -83,7 +83,7 @@ class Glinks extends Component {
           <Form getFormData={this.getFormData} />
           {!isLoaded ? <h4>Loading gLinks (waiting for Heroku to wake up). . .</h4> : filteredLinks.map(link => <Glink key={link.id} link={link} deleteLink={this.deleteLink} updateLink={this.updateLink} />)}
         </div>
-      </React.Fragment >
+      </React.Fragment>
     );
   }
 }
